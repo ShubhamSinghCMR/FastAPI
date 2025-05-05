@@ -9,9 +9,11 @@ from app.database import get_db
 from app.dependencies.auth import oauth2_scheme
 
 router = APIRouter(
-
     tags=["Auth"],
-    responses={401: {"description": "Unauthorized"}, 400: {"description": "Bad Request"}},
+    responses={
+        401: {"description": "Unauthorized"},
+        400: {"description": "Bad Request"},
+    },
 )
 
 

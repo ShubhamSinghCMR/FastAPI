@@ -1,20 +1,23 @@
-# First Time:
+# Project Setup in Windows:
+1. Create virtual environment
+`python -m venv venv`
 
-pip install -r requirements.txt
+2. Activate virtual environment:
+`venv/Scripts/activate`
 
-alembic init alembic
+3. Install project requirents:
+`pip install -r requirements.txt`
 
+4. Setup database (Make sure psql is running):
+- alembic revision -m "Initial tables"
 
-Create initial Migration: - Open Postgresql before it if not using docker
-alembic revision --autogenerate -m "Initial tables"
-alembic upgrade head
-
-# Run:
-Run linters & formatters
+# After Code Changes:
+1. Run linters & formatters:
 isort .; black .; ruff check . --fix; ruff check . --select F401 --fix
 
-Run Test:
+2. Run Test:
 pytest -v
 
-Execute:
-uvicorn app.main:app --reload  
+# Project Execution:
+1. Run the project:
+`uvicorn app.main:app --reload` 

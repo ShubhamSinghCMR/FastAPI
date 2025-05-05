@@ -5,7 +5,6 @@ from app import models, schemas
 from app.database import get_db
 
 router = APIRouter(
-
     tags=["Products"],
     responses={404: {"description": "Not found"}, 400: {"description": "Bad request"}},
 )
