@@ -37,7 +37,7 @@ A full-stack web application for managing customers, products, and orders, built
 | Frontend   | Jinja2, Bootstrap 5, JS |
 | Auth       | JWT, OAuth2PasswordFlow |
 | Testing    | pytest                  |
-| DevOps     | Docker, .env config     |
+| DevOps     | .env config     |
 
 
 
