@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+
+{% block title %}Login - Simple Orders API{% endblock %}
+
+{% block content %}
+<section class="container py-5" style="margin-top: 100px; margin-bottom: 100px;">
+  <div class="row justify-content-center">
+    <div class="col-md-10">
+      <div class="row">
+        <!-- Sign Up Form -->
+        <div class="col-md-6 border-end pe-5">
+          <h2 class="mb-3">Join us<span class="mb-4 text-muted"> - Create an account</span></h2>
+          
+
+          <form id="register-form">
+            <div class="mb-3">
+              <input type="text" name="username" class="form-control" placeholder="Username" required />
+            </div>
+            <div class="mb-3">
+              <input type="email" name="email" class="form-control" placeholder="Email" required />
+            </div>
+            <div class="mb-3">
+              <input type="password" name="password" class="form-control" placeholder="Your password" required />
+            </div>
+            <button type="submit" class="btn btn-dark w-100">Sign up</button>
+          </form>
+        </div>
+
+        <!-- Login Form -->
+        <div class="col-md-6 ps-5">
+          <h2 class="mb-3">Welcome back!</h2>
+          <h5 class="mb-4 text-muted">Login to your account</h5>
+          <form id="login-form">
+            <div class="mb-3">
+              <input type="text" name="username" class="form-control" placeholder="Your username" required />
+            </div>
+            <div class="mb-3">
+              <input type="password" name="password" class="form-control" placeholder="Your password" required />
+            </div>
+            <button type="submit" class="btn btn-dark w-100">Log In</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- JavaScript to handle form submissions and auth -->
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  // ✅ Redirect to dashboard if token exists
+  if (localStorage.getItem("access_token")) {
+    window.location.href = "/dashboard";
+    return;
+  }
+
+  const registerForm = document.getElementById("register-form");
+  const loginForm = document.getElementById("login-form");
+
+  registerForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const formData = new FormData(registerForm);
+    const jsonData = Object.fromEntries(formData.entries());
+
+    const res = await fetch("/api/v1/auth/register", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(jsonData),
+    });
+
+    const data = await res.json();
+    if (res.ok) {
+      alert("✅ Registration successful!");
+      registerForm.reset();
+    } else {
+      alert("❌ Error: " + (data.detail || "Something went wrong"));
+    }
+  });
+
+  loginForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const formData = new FormData(loginForm);
+    const form = new URLSearchParams();
+    form.append("username", formData.get("username"));
+    form.append("password", formData.get("password"));
+
+    const res = await fetch("/api/v1/auth/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: form,
+    });
+
+    const data = await res.json();
+    if (res.ok) {
+      localStorage.setItem("access_token", data.access_token);
+      window.location.href = "/dashboard";
+    } else {
+      alert("❌ Login failed: " + (data.detail || "Invalid credentials"));
+    }
+  });
+});
+</script>
+{% endblock %}

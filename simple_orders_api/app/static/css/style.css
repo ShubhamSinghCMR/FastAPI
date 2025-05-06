@@ -1,0 +1,48 @@
+/* Header navbar styling */
+.custom-navbar {
+    font-size: 1.2rem;
+}
+
+/* Footer styling */
+.footer {
+    font-size: 1.1rem;
+    margin-top: 2rem;
+}
+
+/* Global page styling */
+body {
+    background-color: #f8f9fa;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.container {
+    max-width: 960px;
+}
+.auth-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+}
+
+.auth-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: center;
+    align-items: flex-start;
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.auth-box {
+    width: 300px;
+}
+
+.divider {
+    width: 2px;
+    background-color: #000;
+    height: auto;
+}
