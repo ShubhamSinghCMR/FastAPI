@@ -41,6 +41,16 @@ def create_customer(customer: schemas.CustomerCreate, db: Session = Depends(get_
 
 
 @router.get(
+    "/",
+    response_model=List[schemas.CustomerOut],
+    summary="Get all customers",
+    response_description="Returns a list of all registered customers",
+)
+def get_all_customers(db: Session = Depends(get_db)):
+    return db.query(models.Customer).all()
+
+
+@router.get(
     "/{customer_id}",
     response_model=schemas.CustomerOut,
     summary="Get customer details",

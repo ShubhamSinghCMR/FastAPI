@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block title %}Add Customer - Simple Orders API{% endblock %}
+
+{% block content %}
+<script src="{{ url_for('static', path='js/auth-check.js') }}"></script>
+
+<div class="container mt-5">
+    <h2>Add New Customer</h2>
+    <form id="add-customer-form" class="mt-4">
+        <div class="mb-3">
+            <label>Name</label>
+            <input type="text" name="name" class="form-control" required />
+        </div>
+        <div class="mb-3">
+            <label>Email</label>
+            <input type="email" name="email" class="form-control" required />
+        </div>
+        <button type="submit" class="btn btn-primary">Add Customer</button>
+    </form>
+</div>
+
+<script>
+document.getElementById("add-customer-form").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const data = {
+        name: form.name.value,
+        email: form.email.value
+    };
+
+    const token = localStorage.getItem("access_token");
+
+    const res = await fetch("/api/v1/customers/", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+        },
+        body: JSON.stringify(data)
+    });
+
+    if (res.ok) {
+        alert("Customer added successfully!");
+        window.location.href = "/customers/view";
+    } else {
+        const err = await res.json();
+        alert("Error: " + (err.detail || "Something went wrong."));
+    }
+});
+</script>
+{% endblock %}

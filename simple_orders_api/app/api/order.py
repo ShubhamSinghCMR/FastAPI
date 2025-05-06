@@ -1,13 +1,21 @@
+from typing import List
+
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 
 from app import models, schemas
 from app.database import get_db
+from app.dependencies.auth import get_current_user
 
 router = APIRouter(
     tags=["Orders"],
     responses={404: {"description": "Not found"}, 400: {"description": "Bad request"}},
 )
+
+
+@router.get("/", response_model=List[schemas.order.OrderOut])
+def list_orders(db: Session = Depends(get_db), user=Depends(get_current_user)):
+    return db.query(models.Order).all()
 
 
 @router.post(

@@ -6,7 +6,8 @@ from app import models, schemas
 from app.core.security import create_access_token, hash_password, verify_password
 from app.core.token_blacklist import add_token_to_blacklist
 from app.database import get_db
-from app.dependencies.auth import oauth2_scheme
+from app.dependencies.auth import get_current_user, oauth2_scheme
+from app.models import User  # <-- required for that line
 
 router = APIRouter(
     tags=["Auth"],
@@ -15,6 +16,15 @@ router = APIRouter(
         400: {"description": "Bad Request"},
     },
 )
+
+
+@router.get("/me", response_model=schemas.UserOut)
+def get_logged_in_user(current_user: User = Depends(get_current_user)):
+    return {
+        "id": current_user.id,
+        "username": current_user.username,
+        "email": current_user.email,
+    }
 
 
 @router.post(

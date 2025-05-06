@@ -1,8 +1,11 @@
+from typing import List
+
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 
 from app import models, schemas
 from app.database import get_db
+from app.dependencies.auth import get_current_user
 
 router = APIRouter(
     tags=["Products"],
@@ -94,3 +97,10 @@ def delete_product(product_id: int, db: Session = Depends(get_db)):
     db.delete(product)
     db.commit()
     return None
+
+
+@router.get("/", response_model=List[schemas.ProductOut])
+def get_all_products(
+    db: Session = Depends(get_db), current_user=Depends(get_current_user)
+):
+    return db.query(models.Product).all()
