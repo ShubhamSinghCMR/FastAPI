@@ -7,7 +7,7 @@ from app.core.security import create_access_token, hash_password, verify_passwor
 from app.core.token_blacklist import add_token_to_blacklist
 from app.database import get_db
 from app.dependencies.auth import get_current_user, oauth2_scheme
-from app.models import User  # <-- required for that line
+from app.models import User 
 
 router = APIRouter(
     tags=["Auth"],

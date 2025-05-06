@@ -10,7 +10,7 @@ from app.models import User
 
 oauth2_scheme = OAuth2PasswordBearer(
     tokenUrl="/api/v1/auth/login"
-)  # ✅ Must match the real route
+)  
 
 
 def get_current_user(

@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
 
         const user = await res.json();
-        console.log("Authenticated as:", user.username); // Optional: Use user info if needed
+        console.log("Authenticated as:", user.username); 
     } catch (err) {
         console.warn("Auth check failed:", err.message);
         localStorage.removeItem("access_token");

@@ -56,7 +56,19 @@ cd simple_orders_api
  pip install -r requirements.txt
 ```
 
-3. Run Alembic Migrations
+3. Create database and run Alembic Migrations
+
+Step 1: Enter PostgreSQL shell
+```bash
+psql -U postgres
+```
+
+Step 2: Create database if not exists
+```bash
+CREATE DATABASE orders_db;
+```
+
+Step 3: Run Alembic Migrations
 ```bash
 alembic upgrade head
 ```

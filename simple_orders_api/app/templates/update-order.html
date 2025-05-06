@@ -110,7 +110,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     } catch (err) {
         console.error("Failed to load order or products:", err);
-        alert("❌ Failed to load order data.");
+        alert("Failed to load order data.");
     }
 
     document.getElementById("update-order-form").addEventListener("submit", async (e) => {
@@ -128,11 +128,11 @@ document.addEventListener("DOMContentLoaded", async () => {
         });
 
         if (res.ok) {
-            alert("✅ Order updated successfully!");
+            alert("Order updated successfully!");
             window.location.href = "/orders/view";
         } else {
             const err = await res.json();
-            alert("❌ Error: " + (err.detail || "Something went wrong."));
+            alert("Error: " + (err.detail || "Something went wrong."));
         }
     });
 });

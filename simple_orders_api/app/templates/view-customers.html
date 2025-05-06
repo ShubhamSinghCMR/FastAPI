@@ -17,7 +17,7 @@
             </tr>
         </thead>
         <tbody id="customer-table-body">
-            <!-- JS populates this -->
+         
         </tbody>
     </table>
 </div>
@@ -61,7 +61,7 @@ async function confirmDelete(customerId) {
             alert("Customer deleted successfully.");
             window.location.reload();
         } else {
-            alert("❌ Cannot delete customer: they have existing orders. Please delete their orders first.");
+            alert("Cannot delete customer: they have existing orders. Please delete their orders first.");
         }
     }
 }

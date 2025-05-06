@@ -5,7 +5,7 @@ from app.dependencies.auth import get_current_user
 
 api_v1 = APIRouter()
 
-# Public endpoints (no auth)
+# Public endpoints 
 api_v1.include_router(auth.router, prefix="/auth", tags=["Auth"])
 
 # Protected endpoints

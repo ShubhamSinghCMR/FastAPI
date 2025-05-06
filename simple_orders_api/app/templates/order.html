@@ -131,11 +131,11 @@ document.getElementById("create-order-form").addEventListener("submit", async (e
     });
 
     if (res.ok) {
-        alert("✅ Order created successfully!");
+        alert("Order created successfully!");
         window.location.href = "/orders/view";
     } else {
         const err = await res.json();
-        alert("❌ Error: " + (err.detail || "Something went wrong."));
+        alert("Error: " + (err.detail || "Something went wrong."));
     }
 });
 </script>
