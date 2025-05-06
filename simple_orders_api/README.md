@@ -46,7 +46,7 @@ A full-stack web application for managing customers, products, and orders, built
 1. Clone the Repository
 ```bash
 git clone https://github.com/ShubhamSinghCMR/FastAPI.git
-cd simple-orders-api
+cd simple_orders_api
 ```
 
 2. Setup & activate virtual environment
